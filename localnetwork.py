@@ -3,6 +3,7 @@ import time
 from pymongo import MongoClient
 from termcolor import colored
 
+
 class Network:
     cluster = MongoClient("mongodb+srv://GEEGABYTE1:12345@socialmedia.few6z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = cluster['socialmedia']['messaging']
@@ -10,7 +11,7 @@ class Network:
     
     
 
-    def sending_message(self):
+    def sending_message(self, user):
         while True:
             date = datetime.now().strftime("%x")
             for message in self.all_messages:
@@ -25,7 +26,7 @@ class Network:
                 except:
                     pass
             
-            person = input("Name: ")
+            person = "Name: {}".format(user)
             message = input("Message: ")
 
             if message == '/quit':
