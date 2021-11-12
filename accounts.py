@@ -8,6 +8,7 @@ class Users:
     db = cluster['socialmedia']['accounts']
     all_accounts = db.find({})
     signed_in = False
+    logged_in_user = None
 
     def sign_up(self):
         user_name = str(input("Please enter a username you would like to go by (Note: Users externally will see this name): "))
@@ -35,6 +36,7 @@ class Users:
                         break
                     elif password in passwords:
                         self.signed_in = True 
+                        self.logged_in_user = [user, password]
                         print(colored("You have successfully signed in! ", 'green'))
                         break
                     else:
