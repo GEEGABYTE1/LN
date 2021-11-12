@@ -35,7 +35,7 @@ class Users:
                         break
                     elif password in passwords:
                         self.signed_in = True 
-                        print("You have successfully signed in! ")
+                        print(colored("You have successfully signed in! ", 'green'))
                         break
                     else:
                         print("Password is incorrect")
@@ -47,9 +47,9 @@ class Users:
 
 
             else:
-                print("That username does not seem to be registered on this network")
+                print(colored("That username does not seem to be registered on this network", 'red'))
                 time.sleep(0.2)
-                print("Try signing up to the network!")
+                print(colored("Try signing up to the network!", 'blue'))
         
         if self.signed_in == False:
             print("You have left the logging in process...")
@@ -61,5 +61,5 @@ class Users:
         
     
     
-test = Users()
-test.sign_in() 
+user = Users()
+
