@@ -28,6 +28,11 @@ class Homepage:
                 print("Accessing the global network...")
                 time.sleep(0.2)
                 self.global_network()
+            
+            elif user_prompt == '/create_gc':
+                chat_name = str(input("Please enter a name for your group chat: "))
+                chat_password = str(input("Please enter a password for the chat: "))
+                
 
 
         
