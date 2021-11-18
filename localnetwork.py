@@ -2,12 +2,14 @@ from datetime import datetime
 import time
 from pymongo import MongoClient
 from termcolor import colored
+from hashmap import chatbase
 
 
 class Network:
     cluster = MongoClient("mongodb+srv://GEEGABYTE1:12345@socialmedia.few6z.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = cluster['socialmedia']['messaging']
     all_messages = db.find({})
+    chats = {}
     
     
 
@@ -36,6 +38,15 @@ class Network:
                 msg = {"Id": person, "Message": message, "Date": date, "Time":time}
                 self.db.insert_one(msg)
                 print('-'*25)
+
+    def create_gc(self, name, password):
+        cluser_for_chat = cluster['socialmedia']['gas']
+        ext_db = cluster['socialmedia']
+        name_db = ext_db[name]
+        self.chats[name] = password
+        chatbase.setter(name, name_db)
+
+        
         
 
 
