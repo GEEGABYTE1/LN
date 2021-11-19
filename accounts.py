@@ -13,8 +13,11 @@ class Users:
     def sign_up(self):
         user_name = str(input("Please enter a username you would like to go by (Note: Users externally will see this name): "))
         password = str(input("Please enter a password: "))
+        if user_name == '/quit' or password == '/quit':
+            return False
         acc = {'User': user_name, 'Password': password}
         self.db.insert_one(acc)
+        return True
 
     def sign_in(self):
         while True:
@@ -36,7 +39,7 @@ class Users:
                         break
                     elif password in passwords:
                         self.signed_in = True 
-                        self.logged_in_user = [user, password]
+                        self.logged_in_user = [user, password, []]
                         print(colored("You have successfully signed in! ", 'green'))
                         break
                     else:
@@ -55,6 +58,8 @@ class Users:
         
         if self.signed_in == False:
             print("You have left the logging in process...")
+        
+        return self.signed_in
                 
 
             

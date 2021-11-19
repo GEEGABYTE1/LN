@@ -6,11 +6,43 @@ from accounts import user
 
 class Homepage:
 
+    def user_connection(self):
+        print("/sign_up: If you don't have an account")
+        time.sleep(0.2)
+        print("\n")
+        print("/sign_in: If you have already have an account")
+        while True:
+            prompt = str(input(': '))
+            prompt = prompt.lower()
+            prompt = prompt.strip(" ")
+            if prompt == '/sign_up':
+                while True:
+                    sign_up_process = user.sign_up()
+                    if sign_up_process == True:
+                        print("You have successfully signed up! ")
+                        time.sleep(0.2)
+                        print("You can now sign in")
+                    else:
+                        print("oops, there seems to be an error")
+                        break
+            elif prompt == '/sign_in':
+                process = user.sign_in()
+                if process:
+                    time.sleep(0.3)
+                    print("\n")
+                    self.landing()
+                else:
+                    print("The process was incomplete ")
+            else:
+                print("That command seems to be invalid")
+
+
     def landing(self):
         print("Welcome to LN")
         time.sleep(0.2)
         print("Short form for LocalNetwork")
         time.sleep(0.2)
+        print("\n")
         print("/global_chat: To acess the global chat worldwide")
         time.sleep(0.2)
         print("/create_gc: To create a groupchat")
@@ -32,16 +64,23 @@ class Homepage:
             elif user_prompt == '/create_gc':
                 chat_name = str(input("Please enter a name for your group chat: "))
                 chat_password = str(input("Please enter a password for the chat: "))
-                
+                print("Group chat {name} successfully made!".format(name=chat_name))
+                network.create_gc(chat_name, chat_password)
+                chats = user.logged_in_user[-1]
+                chats.append(chat_name)
+                time.sleep(0.2)
+                print("You can add or invite others! ")
+
 
 
         
     def global_network(self):
-        user_user = user.logged_in_user[0]
-        print(network.sending_message(user_user))
+        if user.signed_in:
+            user_user = user.logged_in_user[0]
+            print(network.sending_message(user_user))
 
 
         
 
 test = Homepage()
-print(test.landing())
+print(test.user_connection())

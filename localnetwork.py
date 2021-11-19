@@ -40,9 +40,10 @@ class Network:
                 print('-'*25)
 
     def create_gc(self, name, password):
-        cluser_for_chat = cluster['socialmedia']['gas']
+        cluser_for_chat = self.cluster['socialmedia']['gas']
         ext_db = cluster['socialmedia']
         name_db = ext_db[name]
+        cluster_for_chat.insert_one(name_db)
         self.chats[name] = password
         chatbase.setter(name, name_db)
 
