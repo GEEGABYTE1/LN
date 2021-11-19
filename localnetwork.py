@@ -43,8 +43,13 @@ class Network:
         cluster_for_chat = self.cluster['socialmedia']['gas']
         ext_db = self.cluster['socialmedia']
         name_db = ext_db[name]
+        dictionary = {name: datetime.now()}
+        name_db.insert_one(dictionary)
         self.chats[name] = password
         chatbase.setter(name, name_db)
+
+    def join_gc(self):
+        pass
 
         
         

@@ -65,10 +65,10 @@ class Homepage:
             elif user_prompt == '/create_gc':
                 chat_name = str(input("Please enter a name for your group chat: "))
                 chat_password = str(input("Please enter a password for the chat: "))
-                print(colored("Group chat {name} successfully made!".format(name=chat_name), 'green'))
                 network.create_gc(chat_name, chat_password)
                 chats = user.logged_in_user[-1]
                 chats.append(chat_name)
+                print(colored("Group chat {name} successfully made!".format(name=chat_name), 'green'))
                 time.sleep(0.2)
                 print(colored("You can now add or invite others! ", "blue"))
 
