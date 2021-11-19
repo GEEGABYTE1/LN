@@ -11,6 +11,7 @@ class Homepage:
     network = network
 
     def user_connection(self):
+        print("\n")
         print("/sign_up: If you don't have an account")
         time.sleep(0.2)
         print("\n")

@@ -75,8 +75,7 @@ class Network:
             if message == '/quit':
                 break
             elif message == '/update':
-                importlib.reload(pymongo)
-                from pymongo import MongoClient
+                self.restart()
                 
                 
             else:
@@ -99,7 +98,8 @@ class Network:
         print("Updating the database")
         import os
         os.execv(sys.executable, ['python'] + sys.argv)
-        print("n")
+        
+
         
                     
 
