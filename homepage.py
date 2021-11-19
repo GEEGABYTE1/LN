@@ -1,6 +1,7 @@
 import time 
 from localnetwork import network
 from accounts import user
+from termcolor import colored
 
 
 
@@ -19,11 +20,11 @@ class Homepage:
                 while True:
                     sign_up_process = user.sign_up()
                     if sign_up_process == True:
-                        print("You have successfully signed up! ")
+                        print(colored("You have successfully signed up! ", 'green'))
                         time.sleep(0.2)
                         print("You can now sign in")
                     else:
-                        print("oops, there seems to be an error")
+                        print(colored("oops, there seems to be an error", 'red'))
                         break
             elif prompt == '/sign_in':
                 process = user.sign_in()
@@ -40,7 +41,7 @@ class Homepage:
     def landing(self):
         print("Welcome to LN")
         time.sleep(0.2)
-        print("Short form for LocalNetwork")
+        print("Short form for LocalNetwork!")
         time.sleep(0.2)
         print("\n")
         print("/global_chat: To acess the global chat worldwide")
@@ -64,12 +65,12 @@ class Homepage:
             elif user_prompt == '/create_gc':
                 chat_name = str(input("Please enter a name for your group chat: "))
                 chat_password = str(input("Please enter a password for the chat: "))
-                print("Group chat {name} successfully made!".format(name=chat_name))
+                print(colored("Group chat {name} successfully made!".format(name=chat_name), 'green'))
                 network.create_gc(chat_name, chat_password)
                 chats = user.logged_in_user[-1]
                 chats.append(chat_name)
                 time.sleep(0.2)
-                print("You can add or invite others! ")
+                print(colored("You can now add or invite others! ", "blue"))
 
 
 
