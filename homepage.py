@@ -6,6 +6,7 @@ from termcolor import colored
 
 
 class Homepage:
+    network = network
 
     def user_connection(self):
         print("/sign_up: If you don't have an account")
@@ -23,6 +24,7 @@ class Homepage:
                         print(colored("You have successfully signed up! ", 'green'))
                         time.sleep(0.2)
                         print("You can now sign in")
+                        break
                     else:
                         print(colored("oops, there seems to be an error", 'red'))
                         break
@@ -65,20 +67,45 @@ class Homepage:
             elif user_prompt == '/create_gc':
                 chat_name = str(input("Please enter a name for your group chat: "))
                 chat_password = str(input("Please enter a password for the chat: "))
-                network.create_gc(chat_name, chat_password)
+                self.network.create_gc(chat_name, chat_password)
                 chats = user.logged_in_user[-1]
                 chats.append(chat_name)
                 print(colored("Group chat {name} successfully made!".format(name=chat_name), 'green'))
                 time.sleep(0.2)
                 print(colored("You can now add or invite others! ", "blue"))
 
+            elif user_prompt == '/join_gc':
+                print("\n")
+                for network in self.network.chats.keys():
+                    print(network)
+                    print('-'*24)
+                    time.sleep(0.2)
+                print('\n')
+                des_chat_name = str(input("Please type in a gc name you want join: "))
+                des_chat_name = des_chat_name.strip(" ")
+                
+                if not des_chat_name in list(self.network.chats.keys()):
+                    print(colored("That group chat does not seem to be made", "red"))
+                    time.sleep(0.2)             
+                    print("Try creating a new group chat instead or make sure you typed the name correctly!")
+                else:
+                    user_chat_password = str(input("Please type in the chat password: "))
+                    chat_password = self.network.chats[des_chat_name]
+                    if user_chat_password == chat_password:
+                        chat_base = self.network.find_chat(des_chat_name)
+                        time.sleep(0.2)
+                        print(colored("{username} has joined the chat! ".format(username=user.logged_in_user[0]), "blue"))
+                        self.network.join_gc(user.logged_in_user[0], chat_base)
 
+
+
+   
 
         
     def global_network(self):
         if user.signed_in:
             user_user = user.logged_in_user[0]
-            print(network.sending_message(user_user))
+            print(self.network.sending_message(user_user))
 
 
         
