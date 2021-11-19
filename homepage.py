@@ -5,6 +5,8 @@ from termcolor import colored
 
 
 
+
+
 class Homepage:
     network = network
 
@@ -96,6 +98,9 @@ class Homepage:
                         time.sleep(0.2)
                         print(colored("{username} has joined the chat! ".format(username=user.logged_in_user[0]), "blue"))
                         self.network.join_gc(user.logged_in_user[0], chat_base)
+
+            else:
+                print("Command not valid")
 
 
 

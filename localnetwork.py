@@ -10,6 +10,7 @@ class Network:
     db = cluster['socialmedia']['messaging']
     all_messages = db.find({})
     chats = {}
+    restart = False
     
     
 
@@ -33,6 +34,8 @@ class Network:
 
             if message == '/quit':
                 break
+            elif message == '/update':
+                self.restart()
             else:
                 time = datetime.now().strftime("%X")
                 msg = {"Id": person, "Message": message, "Date": date, "Time":time}
@@ -71,6 +74,11 @@ class Network:
 
             if message == '/quit':
                 break
+            elif message == '/update':
+                importlib.reload(pymongo)
+                from pymongo import MongoClient
+                
+                
             else:
                 time = datetime.now().strftime("%X")
                 msg = {"Id": person, "Message": message, "Date": date, "Time":time}
@@ -84,6 +92,15 @@ class Network:
             return chat_cluster
         except:
             print("Groupchat not found")
+    
+    def restart(self):
+        print("\n")
+        import sys
+        print("Updating the database")
+        import os
+        os.execv(sys.executable, ['python'] + sys.argv)
+        print("n")
+        
                     
 
 
