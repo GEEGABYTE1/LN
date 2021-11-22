@@ -55,19 +55,24 @@ class Network:
     def join_gc(self, name, chat_base):
         db = chat_base 
         current_messages = db.find({})
+        count = 0
         while True:
             date = datetime.now().strftime("%x")
             for message in current_messages:
-                try:
-                    if date != message['Date']:
-                        print(colored('Today: {}'.format(message['Time']), 'red'))
-                    else:
-                        print(colored("{} ~ {}".format(message['Date'], message['Time']), "red"))
-                    print(colored("From: ", 'green'), message['Id'])
-                    print(colored("Message: ", 'green'), message['Message'])
-                    print('-'*25)
-                except:
-                    pass
+                if count == 0:
+                    pass 
+                else:
+                    try:
+                        if date != message['Date']:
+                            print(colored('Today: {}'.format(message['Time']), 'red'))
+                        else:
+                            print(colored("{} ~ {}".format(message['Date'], message['Time']), "red"))
+                        print(colored("From: ", 'green'), message['Id'])
+                        print(colored("Message: ", 'green'), message['Message'])
+                        print('-'*25)
+                    except:
+                        pass
+                count += 1
             
             person = "Name: {}".format(name)
             message = input("Message: ")
